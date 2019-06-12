@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
+import Friend from './Friend'
+
 class FriendsList extends Component {
     state = {
         friends: []
@@ -8,7 +10,7 @@ class FriendsList extends Component {
 
     componentDidMount() {
         axios
-            .get('localhost:5000/api/friends')
+            .get('http://localhost:5000/friends')
             .then(response => {
                 this.setState(() => ({friends: response.data}))
             })

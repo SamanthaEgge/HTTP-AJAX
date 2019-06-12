@@ -6,6 +6,7 @@ import FriendsList from './components/FriendsList'
 
 const App = () => (
   <div className='app-container'>
+    <h1>A List of Friends!</h1>
     <Route exact path='/' component={FriendsList} />
   </div>
 )
