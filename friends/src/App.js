@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 import axios from 'axios';
 
 import './App.css';
@@ -8,7 +7,12 @@ import AddFriend from './components/AddFriend'
 
 class App extends Component {
   state = {
-    friends: []
+    friends: [],
+    newFriend: {
+      name: '',
+      age: null,
+      email: '',
+    }
   }
 
   componentDidMount() {
@@ -22,24 +26,46 @@ class App extends Component {
         });
   }
 
-  onInput = event => {
+  changeHandler = event => {
+    event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value
+      newFriend: {
+        ...this.state.newFriend,[event.target.name]: event.target.value
+      }
     })
   }
 
   addAFriend = event => {
-    event.preventDefault()
+    event.preventDefault();
+    axios
+      .post('http://localhost:5000/friends', {
+        name: this.state.newFriend.name,
+        age: this.state.newFriend.age,
+        email: this.state.newFriend.email,
+      })
+      .then(response => {
+        console.log('hello, I"m in .then')
+        this.setState({
+          friends: response.data,
+          
+          newFriend: {
+            name: '',
+            age: '',
+            email: '',
+          }
+        })
+      })
+      .catch(error => {
+        console.error('server error', error)
+      })
   }
-
-
 
   render () {
     return (
       <div className='app-container'>
         <h1>A List of Friends!</h1>
         <FriendsList friends={this.state.friends} />
-        <AddFriend onInput={this.onInput} addAFriend={this.addAFriend} />
+        <AddFriend changeHandler={this.changeHandler} addAFriend={this.addAFriend} newFriend={this.state.newFriend} />
       </div>
     )
   }

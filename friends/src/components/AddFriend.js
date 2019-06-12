@@ -1,29 +1,30 @@
 import React from 'react';
 
 const AddFriend = (props) => {
+    const { name, age, email } = props.newFriend
     return (
         <>
             <form className='friend-form' onSubmit={props.addAFriend}>
                 <input 
                     type='text'
                     name='name'
-                    placeHolder='Samantha'
-                    // value={props.nameInput}
-                    onChange={props.onInput} 
+                    placeholder='Samantha'
+                    value={name}
+                    onChange={props.changeHandler} 
                     required />
                 <input 
                     type='number'
                     name='age'
-                    placeHolder='69'
-                    // value={props.ageInput}
-                    onChange={props.onInput} 
+                    placeholder='69'
+                    value={age}
+                    onChange={props.changeHandler} 
                     required />
                 <input 
                     type='email'
                     name='email'
-                    placeHolder='sam.egge@gmail.com'
-                    // value={props.emailInput}
-                    onChange={props.onInput} 
+                    placeholder='sam.egge@gmail.com'
+                    value={email}
+                    onChange={props.changeHandler} 
                     required />
                 <button className='submit-button'>Make-A-Friend</button>
             </form>
