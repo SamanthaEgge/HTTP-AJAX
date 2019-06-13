@@ -60,11 +60,29 @@ class App extends Component {
       })
   }
 
+  editFriend = friend => {
+    axios
+      .put(`http://localhost:50000/friends/${friend.id}`, friend)
+      .then(response => {
+        this.setState({ friends: response.data });
+        this.props.history.push('http://localhost:50000/friends')
+      })
+      .catch(error => console.error('Server Error', error))
+  }
+
+  deleteFriend = friendId => {
+    console.log(friendId);
+    axios
+      .delete(`http://localhost:5000/friends/${friendId}`)
+      .then(response => {this.setState({ friends: response.data }) })
+      .catch(error => console.error('Server Error', error))
+  }
+
   render () {
     return (
       <div className='app-container'>
         <h1>A List of Friends!</h1>
-        <FriendsList friends={this.state.friends} />
+        <FriendsList friends={this.state.friends} editFriend={this.editFriend} deleteFriend={this.deleteFriend} />
         <AddFriend changeHandler={this.changeHandler} addAFriend={this.addAFriend} newFriend={this.state.newFriend} />
       </div>
     )

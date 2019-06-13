@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './FriendsList.css'
+
 const AddFriend = (props) => {
     const { name, age, email } = props.newFriend
     return (
