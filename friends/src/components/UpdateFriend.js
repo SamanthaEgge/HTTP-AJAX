@@ -13,17 +13,17 @@ class UpdateFriend extends Component {
     }
 
     changeHandler = event => {
-        event.preventDefault();
-        this.setState({
+        event.persist();
+        this.setState(prevState => ({
           friend: {
+              ...prevState.friend,
             [event.target.name]: event.target.value
           }
-        })
-    }
+        }))
+    };
 
-    submitUpdate = event => {
-        event.preventDefault();
-        this.props.editFriend(this.state.friend)
+    submitUpdate = () => {
+        this.props.editFriend(this.state.friend);
     }
 
     render () {

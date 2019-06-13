@@ -5,6 +5,8 @@ import UpdateFriend from './UpdateFriend'
 import DeleteFriend from './DeleteFriend'
 
 const Friend = (props) => {
+    const friendID = props.friend.id
+    console.log(friendID)
     return (
         <div className='friend' key={props.friend.id}>
             <div className='friend-info'>
@@ -14,8 +16,8 @@ const Friend = (props) => {
             </div>
 
             <div className='friend-buttons'>
-                <button onClick>Edit</button>
-                <button>Delete</button>
+                <button >Edit</button>
+                <button onClick={event => props.removeFriend(event, friendID)}>Delete</button>
             </div>
 
             <UpdateFriend friend={props.friend} editFriend={props.editFriend} />

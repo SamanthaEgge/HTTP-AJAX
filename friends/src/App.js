@@ -70,7 +70,8 @@ class App extends Component {
       .catch(error => console.error('Server Error', error))
   }
 
-  deleteFriend = friendId => {
+  removeFriend = (event, friendId) => {
+    event.preventDefault();
     console.log(friendId);
     axios
       .delete(`http://localhost:5000/friends/${friendId}`)
@@ -82,7 +83,7 @@ class App extends Component {
     return (
       <div className='app-container'>
         <h1>A List of Friends!</h1>
-        <FriendsList friends={this.state.friends} editFriend={this.editFriend} deleteFriend={this.deleteFriend} />
+        <FriendsList friends={this.state.friends} editFriend={this.editFriend} removeFriend={this.removeFriend} />
         <AddFriend changeHandler={this.changeHandler} addAFriend={this.addAFriend} newFriend={this.state.newFriend} />
       </div>
     )
